@@ -1,0 +1,25 @@
+## .NET Build Artifacts
+bin/
+obj/
+
+## User-specific files
+*.user
+*.suo
+*.vs/
+.vs/
+
+## Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+
+## NuGet
+*.nupkg
+*.nuget.props
+*.nuget.targets
+packages/
+
+## OS
+.DS_Store
+Thumbs.db
