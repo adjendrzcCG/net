@@ -1,6 +1,5 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using SimpleWebApp.Models;
 
 namespace SimpleWebApp.Controllers
@@ -21,8 +20,8 @@ namespace SimpleWebApp.Controllers
 
         public IActionResult About()
         {
-            ViewData["Message"] = "A simple .NET web application.";
-            return View();
+            _logger.LogInformation("About page accessed.");
+            return View(new AboutViewModel());
         }
 
         public IActionResult Privacy()
