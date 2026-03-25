@@ -1,20 +1,36 @@
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
+// ──────────────────────────────────────────────────────────────────────────────
+// Minimal hosting model (ASP.NET Core / .NET 9)
+// Startup.cs has been merged into this file and is no longer active.
+// ──────────────────────────────────────────────────────────────────────────────
 
-namespace SimpleWebApp
+var builder = WebApplication.CreateBuilder(args);
+
+// ── Service registration ─────────────────────────────────────────────────────
+builder.Services.AddControllersWithViews();
+
+// ── Build the application ─────────────────────────────────────────────────────
+var app = builder.Build();
+
+// ── Middleware pipeline ───────────────────────────────────────────────────────
+if (app.Environment.IsDevelopment())
 {
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            CreateHostBuilder(args).Build().Run();
-        }
-
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
-    }
+    app.UseDeveloperExceptionPage();
 }
+else
+{
+    app.UseExceptionHandler("/Home/Error");
+    app.UseHsts();
+}
+
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+
+app.UseRouting();
+
+app.UseAuthorization();
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.Run();
