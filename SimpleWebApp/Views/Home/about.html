@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!--
+  Home/about.html — Thymeleaf template
+  ======================================
+  Java/Spring Boot equivalent of Views/Home/About.cshtml
+
+  .NET Razor original:
+    @{
+        ViewData["Title"] = "About";
+    }
+    <h2>@ViewData["Title"]</h2>
+    <h3>@ViewData["Message"]</h3>
+    <p>This is a simple ASP.NET Core MVC application.</p>
+
+  Thymeleaf equivalent (this file):
+    - @ViewData["Title"]   → <title> tag (handled by Layout Dialect)
+    - @ViewData["Message"] → th:text="${message}"  (model attribute from controller)
+
+  Controller: HomeController.about(Model) → GET /home/about
+    model.addAttribute("message", "A simple Java Spring Boot web application.")
+-->
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <!--
+      Page title — equivalent to ViewData["Title"] = "About"
+      Rendered as "About - SimpleWebApp" by the Layout Dialect title pattern.
+    -->
+    <title>About</title>
+</head>
+<body>
+
+    <div layout:fragment="content">
+        <!--
+          <h2>@ViewData["Title"]</h2>
+          Title is already in the page's <title> and the browser tab;
+          we display it directly as static text here.
+        -->
+        <h2>About</h2>
+
+        <!--
+          <h3>@ViewData["Message"]</h3>
+          → th:text="${message}" reads the "message" attribute set by the controller:
+            model.addAttribute("message", "A simple Java Spring Boot web application.")
+          The fallback text ("A simple Java Spring Boot web application.") is shown
+          during Thymeleaf natural template preview (th:text replaces it at runtime).
+        -->
+        <h3 th:text="${message}">A simple Java Spring Boot web application.</h3>
+
+        <!--
+          Static text — equivalent to the <p> in the original About.cshtml.
+          Updated to reflect the Java/Spring Boot stack.
+        -->
+        <p>This is a simple Spring Boot MVC application &mdash; the Java equivalent
+           of the original ASP.NET Core SimpleWebApp.</p>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  SimpleWebApp — Java/Spring Boot Port
+  ======================================
+  Java equivalent of the ASP.NET Core MVC SimpleWebApp.
+
+  Stack:
+    Java        : 21 LTS  (replaces .NET 8)
+    Spring Boot : 3.3.5   (replaces ASP.NET Core MVC)
+    Thymeleaf   : 3.1.x   (replaces Razor .cshtml views)
+    Maven       : 3.9+    (replaces MSBuild / .csproj)
+    Jakarta EE  : 10      (jakarta.* namespace throughout)
+    Tomcat      : 10.1    (embedded, replaces Kestrel)
+
+  Non-standard Maven layout:
+    Source files are co-located with the .NET source for side-by-side comparison:
+      Controllers/HomeController.java   ← com.simplewebapp.controller
+      Models/ErrorViewModel.java        ← com.simplewebapp.model
+      SimpleWebAppApplication.java      ← com.simplewebapp (main)
+    Templates are in Views/ and mapped to the classpath templates/ directory.
+    Static assets are in wwwroot/ and mapped to the classpath static/ directory.
+
+  Build:
+    mvn clean package          — produces target/SimpleWebApp-1.0.0.jar
+    java -jar target/SimpleWebApp-1.0.0.jar — runs on port 8080
+
+  Migration guide: JAVA-MODERNIZATION.md
+  Analysis report: modernize-java-report.json
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <!-- ─── Spring Boot Parent BOM ──────────────────────────────────────────── -->
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>3.3.5</version>
+    <relativePath/> <!-- lookup parent from Maven Central -->
+  </parent>
+
+  <!-- ─── Project Coordinates ─────────────────────────────────────────────── -->
+  <groupId>com.simplewebapp</groupId>
+  <artifactId>SimpleWebApp</artifactId>
+  <version>1.0.0</version>
+  <packaging>jar</packaging>
+
+  <name>SimpleWebApp</name>
+  <description>
+    Java 21 / Spring Boot 3.x MVC web application —
+    equivalent of the ASP.NET Core SimpleWebApp.
+  </description>
+
+  <!-- ─── Java Version ─────────────────────────────────────────────────────── -->
+  <properties>
+    <java.version>21</java.version>
+    <!-- Thymeleaf Layout Dialect version (not managed by Spring Boot BOM) -->
+    <thymeleaf-layout-dialect.version>3.3.0</thymeleaf-layout-dialect.version>
+  </properties>
+
+  <!-- ─── Dependencies ─────────────────────────────────────────────────────── -->
+  <dependencies>
+
+    <!--
+      Spring Boot Web Starter
+      Bundles: Spring MVC, Jackson, embedded Tomcat 10.1, Servlet 6.0
+      .NET equivalent: Microsoft.AspNetCore.Mvc + Kestrel
+    -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+
+    <!--
+      Spring Boot Thymeleaf Starter
+      Bundles: Thymeleaf 3.1.x, Spring-Thymeleaf integration
+      .NET equivalent: Razor view engine (built into ASP.NET Core MVC)
+    -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-thymeleaf</artifactId>
+    </dependency>
+
+    <!--
+      Thymeleaf Layout Dialect
+      Provides layout:decorate / layout:fragment for shared page layouts.
+      .NET equivalent: _Layout.cshtml + @RenderBody() / @RenderSection()
+    -->
+    <dependency>
+      <groupId>nz.net.ultraq.thymeleaf</groupId>
+      <artifactId>thymeleaf-layout-dialect</artifactId>
+      <version>${thymeleaf-layout-dialect.version}</version>
+    </dependency>
+
+    <!--
+      Spring Boot Test Starter
+      Bundles: JUnit 5.10, Mockito 5.x, AssertJ 3.x, Spring Test, MockMvc
+      .NET equivalent: xUnit / MSTest + Moq
+    -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+  </dependencies>
+
+  <!-- ─── Build Configuration ──────────────────────────────────────────────── -->
+  <build>
+
+    <!--
+      Non-standard source directory:
+      Java source files are co-located with the .NET source in the SimpleWebApp/
+      directory for side-by-side comparison. Maven's compiler plugin scans
+      this directory recursively for *.java files regardless of sub-directory
+      names, compiling them based on their package declarations.
+
+      Affected Java files:
+        SimpleWebAppApplication.java       → package com.simplewebapp
+        Controllers/HomeController.java    → package com.simplewebapp.controller
+        Models/ErrorViewModel.java         → package com.simplewebapp.model
+
+      NOTE: In a greenfield Java project, these would live at:
+        src/main/java/com/simplewebapp/SimpleWebAppApplication.java
+        src/main/java/com/simplewebapp/controller/HomeController.java
+        src/main/java/com/simplewebapp/model/ErrorViewModel.java
+    -->
+    <sourceDirectory>${project.basedir}</sourceDirectory>
+
+    <resources>
+
+      <!--
+        Thymeleaf Templates:
+        Views/**/*.html  →  classpath:/templates/**/*.html
+        .NET equivalent: Views/**/*.cshtml served by Razor view engine
+        Excludes .cshtml Razor files (not valid Thymeleaf templates).
+      -->
+      <resource>
+        <directory>${project.basedir}/Views</directory>
+        <targetPath>templates</targetPath>
+        <includes>
+          <include>**/*.html</include>
+        </includes>
+      </resource>
+
+      <!--
+        Static CSS:
+        wwwroot/css/**  →  classpath:/static/css/**
+        .NET equivalent: app.UseStaticFiles() serving wwwroot/css/
+      -->
+      <resource>
+        <directory>${project.basedir}/wwwroot/css</directory>
+        <targetPath>static/css</targetPath>
+      </resource>
+
+      <!--
+        Static JavaScript:
+        wwwroot/js/**  →  classpath:/static/js/**
+        .NET equivalent: app.UseStaticFiles() serving wwwroot/js/
+      -->
+      <resource>
+        <directory>${project.basedir}/wwwroot/js</directory>
+        <targetPath>static/js</targetPath>
+      </resource>
+
+      <!--
+        Application Configuration:
+        application.properties  →  classpath:/application.properties
+        application-dev.properties  →  classpath:/application-dev.properties
+        .NET equivalent: appsettings.json + appsettings.Development.json
+      -->
+      <resource>
+        <directory>${project.basedir}</directory>
+        <includes>
+          <include>application.properties</include>
+          <include>application-*.properties</include>
+        </includes>
+      </resource>
+
+    </resources>
+
+    <plugins>
+
+      <!--
+        Maven Compiler Plugin — Java 21
+        Enables modern language features: records, sealed classes, text blocks,
+        pattern matching, switch expressions, virtual threads, etc.
+      -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>21</source>
+          <target>21</target>
+          <compilerArgs>
+            <arg>-parameters</arg>  <!-- Preserve parameter names for Spring MVC -->
+          </compilerArgs>
+          <!-- Exclude generated/compiled output directories from source scanning -->
+          <excludes>
+            <exclude>target/**/*.java</exclude>
+          </excludes>
+        </configuration>
+      </plugin>
+
+      <!--
+        Spring Boot Maven Plugin
+        Produces an executable fat JAR with embedded Tomcat 10.1.
+        .NET equivalent: dotnet publish → self-contained executable
+        Run: java -jar target/SimpleWebApp-1.0.0.jar
+      -->
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <configuration>
+          <!-- Explicitly specify main class to avoid ambiguity -->
+          <mainClass>com.simplewebapp.SimpleWebAppApplication</mainClass>
+        </configuration>
+      </plugin>
+
+    </plugins>
+  </build>
+
+</project>

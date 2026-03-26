@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!--
+  Home/index.html — Thymeleaf template
+  ======================================
+  Java/Spring Boot equivalent of Views/Home/Index.cshtml
+
+  .NET Razor original:
+    @{
+        ViewData["Title"] = "Home Page";
+    }
+    <div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+        <p>Learn about <a href="...">building Web apps with ASP.NET Core</a>.</p>
+    </div>
+
+  Thymeleaf equivalent (this file):
+    - layout:decorate="~{layout}"  →  uses layout.html as the page shell
+    - <title>                      →  sets the page title (merged by Layout Dialect)
+    - layout:fragment="content"    →  fills the @RenderBody() insertion point
+    - No @{} code blocks needed    →  title is set declaratively in <head>
+
+  Controller: HomeController.index() → GET /
+-->
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <!--
+      Page title — equivalent to ViewData["Title"] = "Home Page"
+      The Layout Dialect merges this with the layout's title pattern:
+      "Home Page - SimpleWebApp"
+    -->
+    <title>Home Page</title>
+</head>
+<body>
+
+    <!--
+      layout:fragment="content" fills the layout's @RenderBody() slot.
+      Content is identical to the original Index.cshtml body.
+    -->
+    <div layout:fragment="content">
+        <div class="text-center">
+            <h1 class="display-4">Welcome</h1>
+            <p>
+                Learn about
+                <a href="https://spring.io/projects/spring-boot">
+                    building Web apps with Spring Boot
+                </a>.
+            </p>
+        </div>
+    </div>
+
+</body>
+</html>
