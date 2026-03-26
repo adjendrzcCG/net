@@ -1,0 +1,14 @@
+{
+  "scenarioId": "dotnet-version-upgrade",
+  "operationId": "c43f9973-33a5-4160-b308-e3d0e65ce2a6",
+  "description": "Upgrade .NET projects to newer .NET versions",
+  "startTime": "2026-03-26T07:40:10.8485737Z",
+  "lastUpdateTime": "2026-03-26T07:43:53.2924775Z",
+  "properties": {
+    "task:01.03-build-validate:startedAt": "2026-03-26T07:43:53.2924682Z",
+    "currentTask": "01.03-build-validate",
+    "task:01.02-file-scoped-namespaces:startedAt": "2026-03-26T07:43:25.0680504Z",
+    "task:01.01-program-startup-merge:startedAt": "2026-03-26T07:43:02.8038155Z"
+  },
+  "folderPath": ""
+}
