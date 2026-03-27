@@ -1,16 +1,16 @@
 # Tasks
 
 ## 01-program-cs — Rewrite Program.cs with minimal hosting model
-**Status**: ⏳ Pending
+**Status**: ✅ Done
 
 ## 02-remove-startup — Delete Startup.cs
-**Status**: ⏳ Pending
+**Status**: ✅ Done
 
 ## 03-modernize-codefiles — Apply file-scoped namespaces to C# source files
-**Status**: ⏳ Pending
+**Status**: ✅ Done
 
 ## 04-enable-nullable — Enable Nullable + ImplicitUsings; fix nullable annotations
-**Status**: ⏳ Pending
+**Status**: ✅ Done
 
 ## 05-build-validate — Build and validate zero errors/warnings
-**Status**: ⏳ Pending
+**Status**: ✅ Done
