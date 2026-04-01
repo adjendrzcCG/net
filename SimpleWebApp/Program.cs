@@ -9,6 +9,7 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
+// In Development, WebApplication automatically enables the developer exception page.
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

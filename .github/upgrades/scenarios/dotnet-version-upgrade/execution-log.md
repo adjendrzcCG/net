@@ -18,3 +18,8 @@ Added `&lt;Nullable&gt;enable&lt;/Nullable&gt;` to csproj. Fixed ErrorViewModel.
 
 ImplicitUsings already enabled. Inspected generated GlobalUsings.g.cs to find covered namespaces. Removed `using Microsoft.Extensions.Logging` from HomeController.cs (auto-included). Kept System.Diagnostics, Microsoft.AspNetCore.Mvc, and SimpleWebApp.Models (not auto-included). Build: 0 errors, 0 warnings.
 
+
+## [2026-04-01 06:48] 05-file-scoped-namespaces
+
+Converted HomeController.cs and ErrorViewModel.cs from block-scoped to file-scoped namespaces (namespace Foo; syntax). Program.cs uses top-level statements — no namespace needed. Build: 0 errors, 0 warnings.
+
