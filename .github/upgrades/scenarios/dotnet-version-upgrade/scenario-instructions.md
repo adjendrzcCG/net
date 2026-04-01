@@ -30,4 +30,4 @@
 
 ## Key Decisions Log
 
-- 2024: User requested full .NET 8 modernization on project that already targets net8.0 but uses legacy patterns
+- 2026-04-01: User requested full .NET 8 modernization on project that already targets net8.0 but uses legacy patterns
