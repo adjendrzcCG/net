@@ -3,7 +3,7 @@
   "operationId": "866d6e63-8bab-46c0-93a5-92c85b442046",
   "description": "Upgrade .NET projects to newer .NET versions",
   "startTime": "2026-04-01T06:37:51.7785183Z",
-  "lastUpdateTime": "2026-04-01T06:48:07.4684744Z",
+  "lastUpdateTime": "2026-04-01T06:50:54.0094048Z",
   "properties": {
     "UpgradeTargetFramework": "net8.0",
     "taskStates": {
@@ -12,7 +12,7 @@
       "03-enable-nullable": "Completed",
       "04-implicit-usings": "Completed",
       "05-file-scoped-namespaces": "Completed",
-      "06-final-validation": "InProgress"
+      "06-final-validation": "Completed"
     }
   },
   "folderPath": ""
