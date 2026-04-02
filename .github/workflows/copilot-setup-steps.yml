@@ -11,14 +11,18 @@ jobs:
       contents: read
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/checkout@v4
+      - name: Setup Java 21
+        uses: actions/setup-java@v4
         with:
-          node-version: "24"
-      - name: Install Copilot CLI
-        run: npm install -g @github/copilot
-      - name: Setup .NET 10 SDK
-        uses: actions/setup-dotnet@v5
+          java-version: "21"
+          distribution: "temurin"
+      - name: Setup Maven Cache
+        uses: actions/cache@v4
         with:
-          dotnet-version: "10.0.x"
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+      - name: Build with Maven
+        run: mvn clean install -DskipTests
