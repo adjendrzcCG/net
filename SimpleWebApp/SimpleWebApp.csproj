@@ -4,6 +4,13 @@
     <TargetFramework>net8.0</TargetFramework>
     <RootNamespace>SimpleWebApp</RootNamespace>
     <AssemblyName>SimpleWebApp</AssemblyName>
+    <!--
+      Nullable: surfaces null-safety issues as compiler warnings/errors.
+      ImplicitUsings: auto-imports the most common ASP.NET Core namespaces
+      globally, removing boilerplate 'using' directives from every file.
+    -->
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
 </Project>
