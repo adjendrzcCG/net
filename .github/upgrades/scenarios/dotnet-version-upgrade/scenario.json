@@ -1,0 +1,15 @@
+{
+  "scenarioId": "dotnet-version-upgrade",
+  "operationId": "6ac15409-a63f-4aec-b845-02e35a8452d4",
+  "description": "Upgrade .NET projects to newer .NET versions",
+  "startTime": "2026-04-03T07:11:27.195191Z",
+  "lastUpdateTime": "2026-04-03T07:28:36.208048Z",
+  "properties": {
+    "UpgradeTargetFramework": "net9.0",
+    "taskStates": {
+      "01-upgrade-simplewebapp": "Completed",
+      "02-final-validation": "Completed"
+    }
+  },
+  "folderPath": ""
+}
