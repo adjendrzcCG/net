@@ -1,0 +1,16 @@
+# .NET 8 Modernization Progress
+
+## Overview
+
+Modernizing SimpleWebApp from legacy .NET 3.x-era code patterns to idiomatic .NET 8 style. The project already targets net8.0 but retains the old `CreateHostBuilder`/`Startup` hosting pattern. Changes include: minimal hosting model migration, nullable reference types, implicit usings, and file-scoped namespaces.
+
+**Progress**: 6/6 tasks complete <progress value="100" max="100"></progress> 100%
+
+## Tasks
+
+- ✅ 01-prerequisites: Verify environment and capture baseline ([Content](tasks/01-prerequisites/task.md), [Progress](tasks/01-prerequisites/progress-details.md))
+- ✅ 02-modernize-hosting: Migrate to minimal hosting model ([Content](tasks/02-modernize-hosting/task.md), [Progress](tasks/02-modernize-hosting/progress-details.md))
+- ✅ 03-enable-nullable: Enable nullable reference types ([Content](tasks/03-enable-nullable/task.md), [Progress](tasks/03-enable-nullable/progress-details.md))
+- ✅ 04-implicit-usings: Enable implicit usings and remove redundant directives ([Content](tasks/04-implicit-usings/task.md), [Progress](tasks/04-implicit-usings/progress-details.md))
+- ✅ 05-file-scoped-namespaces: Convert to file-scoped namespaces ([Content](tasks/05-file-scoped-namespaces/task.md), [Progress](tasks/05-file-scoped-namespaces/progress-details.md))
+- ✅ 06-final-validation: Full build validation and cleanup ([Content](tasks/06-final-validation/task.md), [Progress](tasks/06-final-validation/progress-details.md))
