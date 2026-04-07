@@ -9,10 +9,10 @@
 
 ### Controllers/HomeController.cs
 - Convert namespace to file-scoped
-- Remove `using System.Diagnostics;` — covered by implicit usings
-- Remove `using Microsoft.AspNetCore.Mvc;` — covered by implicit usings for ASP.NET Core
-- Remove `using Microsoft.Extensions.Logging;` — covered by implicit usings
-- Remove `using SimpleWebApp.Models;` — keep (project-specific, not implicit)
+- Remove `using Microsoft.Extensions.Logging;` — covered by Web SDK implicit usings
+- Keep `using Microsoft.AspNetCore.Mvc;` — NOT covered by implicit usings (required for `Controller`, `IActionResult`, `ResponseCache`, `ResponseCacheLocation`)
+- Keep `using System.Diagnostics;` — NOT covered by implicit usings (required for `Activity.Current`)
+- Keep `using SimpleWebApp.Models;` — project-specific, not implicit
 
 Note: After enabling ImplicitUsings, the SDK-default global usings for `Microsoft.NET.Sdk.Web` include:
 `System`, `System.Collections.Generic`, `System.IO`, `System.Linq`, `System.Net.Http`,
@@ -21,7 +21,8 @@ Note: After enabling ImplicitUsings, the SDK-default global usings for `Microsof
 `Microsoft.AspNetCore.Routing`, `Microsoft.Extensions.Configuration`, `Microsoft.Extensions.DependencyInjection`,
 `Microsoft.Extensions.Hosting`, `Microsoft.Extensions.Logging`
 
-`System.Diagnostics`, `Microsoft.AspNetCore.Mvc`, and `Microsoft.Extensions.Logging` ARE covered.
+`Microsoft.Extensions.Logging` IS covered → removed.  
+`System.Diagnostics` and `Microsoft.AspNetCore.Mvc` are NOT covered → kept.  
 `SimpleWebApp.Models` is NOT covered — keep it.
 
 ### Models/ErrorViewModel.cs

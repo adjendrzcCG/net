@@ -2,10 +2,10 @@
 
 ## Changes Made
 
-### SimpleWebApp/Controllers/HomeController.cs
+### Controllers/HomeController.cs
 - Converted block-scoped namespace to file-scoped (`namespace SimpleWebApp.Controllers;`)
 - Removed `using Microsoft.Extensions.Logging;` — covered by Web SDK implicit usings
-- Kept `using Microsoft.AspNetCore.Mvc;` — NOT covered by implicit usings (required)
+- Kept `using Microsoft.AspNetCore.Mvc;` — NOT covered by implicit usings (required for Controller, IActionResult, ResponseCache, etc.)
 - Kept `using System.Diagnostics;` — NOT covered by implicit usings (required for `Activity.Current`)
 - Kept `using SimpleWebApp.Models;` — project-specific, not implicit
 
