@@ -1,0 +1,17 @@
+{
+  "scenarioId": "dotnet-version-upgrade",
+  "operationId": "48d923a6-7689-4e82-88b6-3637c7b51f70",
+  "description": "Upgrade .NET projects to newer .NET versions",
+  "startTime": "2026-04-07T06:22:57.3218038Z",
+  "lastUpdateTime": "2026-04-07T06:32:16.3946373Z",
+  "properties": {
+    "UpgradeTargetFramework": "net8.0",
+    "taskStates": {
+      "01-modernize-project-file": "Completed",
+      "02-minimal-hosting": "Completed",
+      "03-file-scoped-namespaces": "Completed",
+      "04-final-validation": "Completed"
+    }
+  },
+  "folderPath": ""
+}
