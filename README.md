@@ -19,9 +19,15 @@ mvn clean verify
 ## Run the demo
 
 ```bash
-MAVEN_OPTS="--enable-preview" \
-  mvn compile exec:java -Dexec.mainClass=com.example.library.LibraryApp
+mvn compile exec:java \
+  -Dexec.mainClass=com.example.library.LibraryApp \
+  -Dexec.args="--enable-preview" \
+  -Djvm.args="--enable-preview"
 ```
+
+> **Note:** The `--enable-preview` flag must be passed to the JVM, not to Maven itself.
+> The `exec-maven-plugin` forwards JVM arguments via `jvm.args` or can be configured
+> in `pom.xml` under the `exec-maven-plugin` `<configuration>` block.
 
 ## Java 21 features showcased
 
