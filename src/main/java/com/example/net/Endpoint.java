@@ -16,7 +16,7 @@ import java.util.OptionalInt;
  */
 public record Endpoint(String scheme, String host, int port, String path) {
 
-    /** Validates and normalises record components. */
+    /** Validates and normalizes record components. */
     public Endpoint {
         Objects.requireNonNull(scheme, "scheme must not be null");
         Objects.requireNonNull(host, "host must not be null");
