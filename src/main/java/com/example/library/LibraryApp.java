@@ -67,12 +67,8 @@ public class LibraryApp {
                .forEach(e -> System.out.printf("  %-10s book=%-5s member=%-5s%n",
                        e.eventType(), e.bookId(), e.memberId()));
 
-        System.out.println("\n=== Member tier labels ===");
-        registry.searchByName("")   // empty → returns nothing; iterate directly
-                .forEach(m -> System.out.printf("  %-20s tier=%s%n",
-                        m.name(), m.tier().label()));
-
         // Use a switch expression to produce a tier summary for each member
+        System.out.println("\n=== Member tier labels ===");
         for (var id : new String[]{"M001", "M002", "M003"}) {
             registry.findById(id).ifPresent(m -> {
                 String tierSummary = switch (m.tier()) {

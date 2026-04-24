@@ -19,8 +19,8 @@ mvn clean verify
 ## Run the demo
 
 ```bash
-mvn compile exec:java -Dexec.mainClass=com.example.library.LibraryApp \
-    -Dexec.args="" --enable-preview
+MAVEN_OPTS="--enable-preview" \
+  mvn compile exec:java -Dexec.mainClass=com.example.library.LibraryApp
 ```
 
 ## Java 21 features showcased
