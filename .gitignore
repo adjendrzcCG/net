@@ -1,25 +1,26 @@
-## .NET Build Artifacts
-bin/
-obj/
+## Maven build output
+target/
+!.mvn/wrapper/maven-wrapper.jar
 
-## User-specific files
-*.user
-*.suo
-*.vs/
-.vs/
+## IDE files
+.idea/
+*.iml
+*.iws
+*.ipr
+.classpath
+.project
+.settings/
+.factorypath
 
-## Build results
-[Dd]ebug/
-[Rr]elease/
-x64/
-x86/
+## Eclipse
+*.class
 
-## NuGet
-*.nupkg
-*.nuget.props
-*.nuget.targets
-packages/
+## VS Code
+.vscode/
 
 ## OS
 .DS_Store
 Thumbs.db
+
+## Java upgrade logs (CI artifacts)
+.github/java-upgrade/
