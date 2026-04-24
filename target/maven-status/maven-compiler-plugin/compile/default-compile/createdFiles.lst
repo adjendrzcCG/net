@@ -1,7 +1,0 @@
-com/example/net/HttpResult$Failure.class
-com/example/net/HttpResult$Success.class
-com/example/net/Endpoint.class
-com/example/net/HttpRequestBuilder.class
-com/example/net/HttpClientFactory.class
-com/example/net/HttpResult.class
-com/example/net/Application.class
