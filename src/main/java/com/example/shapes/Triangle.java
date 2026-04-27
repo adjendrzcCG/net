@@ -1,39 +1,32 @@
 package com.example.shapes;
 
 /**
- * Represents a triangle shape.
- * Java 11-era pattern: concrete class extending abstract base.
+ * Immutable record representing a triangle defined by its three side lengths.
+ *
+ * <p>Java 21 modernization: replaces the mutable class with a record.
+ * Compact constructor validates the triangle inequality.
  */
-public class Triangle extends Shape {
+public record Triangle(double sideA, double sideB, double sideC, String color)
+        implements Shape {
 
-    private double sideA;
-    private double sideB;
-    private double sideC;
-
-    public Triangle(double sideA, double sideB, double sideC, String color) {
-        super(color);
-        if (!isValid(sideA, sideB, sideC)) {
+    public Triangle {
+        if (sideA <= 0 || sideB <= 0 || sideC <= 0) {
             throw new IllegalArgumentException(
-                "Invalid triangle: sides " + sideA + ", " + sideB + ", " + sideC);
+                "All sides must be positive, got: %s, %s, %s".formatted(sideA, sideB, sideC));
         }
-        this.sideA = sideA;
-        this.sideB = sideB;
-        this.sideC = sideC;
+        if (sideA + sideB <= sideC || sideA + sideC <= sideB || sideB + sideC <= sideA) {
+            throw new IllegalArgumentException(
+                "Invalid triangle inequality for sides: %s, %s, %s".formatted(sideA, sideB, sideC));
+        }
+        if (color == null || color.isBlank()) {
+            throw new IllegalArgumentException("Color must not be blank");
+        }
     }
-
-    private static boolean isValid(double a, double b, double c) {
-        return a > 0 && b > 0 && c > 0 &&
-               a + b > c && a + c > b && b + c > a;
-    }
-
-    public double getSideA() { return sideA; }
-    public double getSideB() { return sideB; }
-    public double getSideC() { return sideC; }
 
     @Override
     public double area() {
         // Heron's formula
-        double s = (sideA + sideB + sideC) / 2.0;
+        var s = (sideA + sideB + sideC) / 2.0;
         return Math.sqrt(s * (s - sideA) * (s - sideB) * (s - sideC));
     }
 
@@ -42,35 +35,21 @@ public class Triangle extends Shape {
         return sideA + sideB + sideC;
     }
 
-    @Override
-    public String describe() {
-        return "Triangle with sides " + sideA + ", " + sideB + ", " + sideC +
-               " and color " + getColor();
+    /** Classifies this triangle by its sides. */
+    public TriangleKind kind() {
+        if (Double.compare(sideA, sideB) == 0 && Double.compare(sideB, sideC) == 0) {
+            return TriangleKind.EQUILATERAL;
+        }
+        if (Double.compare(sideA, sideB) == 0
+                || Double.compare(sideB, sideC) == 0
+                || Double.compare(sideA, sideC) == 0) {
+            return TriangleKind.ISOSCELES;
+        }
+        return TriangleKind.SCALENE;
     }
 
-    @Override
-    public String toString() {
-        return "Triangle{sideA=" + sideA + ", sideB=" + sideB +
-               ", sideC=" + sideC + ", color=" + getColor() + "}";
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-        Triangle triangle = (Triangle) obj;
-        return Double.compare(triangle.sideA, sideA) == 0 &&
-               Double.compare(triangle.sideB, sideB) == 0 &&
-               Double.compare(triangle.sideC, sideC) == 0 &&
-               getColor().equals(triangle.getColor());
-    }
-
-    @Override
-    public int hashCode() {
-        int result = Double.hashCode(sideA);
-        result = 31 * result + Double.hashCode(sideB);
-        result = 31 * result + Double.hashCode(sideC);
-        result = 31 * result + getColor().hashCode();
-        return result;
+    /** Classification of a triangle by its side lengths. */
+    public enum TriangleKind {
+        EQUILATERAL, ISOSCELES, SCALENE
     }
 }

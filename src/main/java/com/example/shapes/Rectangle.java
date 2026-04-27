@@ -1,34 +1,22 @@
 package com.example.shapes;
 
 /**
- * Represents a rectangle shape.
- * Java 11-era pattern: concrete class extending abstract base.
+ * Immutable record representing a rectangle.
+ *
+ * <p>Java 21 modernization: replaces the mutable class with a record.
+ * The compact constructor validates that width and height are positive,
+ * eliminating the need for separate setter guards.
  */
-public class Rectangle extends Shape {
+public record Rectangle(double width, double height, String color) implements Shape {
 
-    private double width;
-    private double height;
-
-    public Rectangle(double width, double height, String color) {
-        super(color);
-        this.width = width;
-        this.height = height;
-    }
-
-    public double getWidth() {
-        return width;
-    }
-
-    public void setWidth(double width) {
-        this.width = width;
-    }
-
-    public double getHeight() {
-        return height;
-    }
-
-    public void setHeight(double height) {
-        this.height = height;
+    public Rectangle {
+        if (width <= 0 || height <= 0) {
+            throw new IllegalArgumentException(
+                "Width and height must be positive, got: %s x %s".formatted(width, height));
+        }
+        if (color == null || color.isBlank()) {
+            throw new IllegalArgumentException("Color must not be blank");
+        }
     }
 
     @Override
@@ -41,33 +29,8 @@ public class Rectangle extends Shape {
         return 2 * (width + height);
     }
 
-    @Override
-    public String describe() {
-        return "Rectangle with width " + width + ", height " + height +
-               " and color " + getColor();
-    }
-
-    @Override
-    public String toString() {
-        return "Rectangle{width=" + width + ", height=" + height +
-               ", color=" + getColor() + "}";
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-        Rectangle rectangle = (Rectangle) obj;
-        return Double.compare(rectangle.width, width) == 0 &&
-               Double.compare(rectangle.height, height) == 0 &&
-               getColor().equals(rectangle.getColor());
-    }
-
-    @Override
-    public int hashCode() {
-        int result = Double.hashCode(width);
-        result = 31 * result + Double.hashCode(height);
-        result = 31 * result + getColor().hashCode();
-        return result;
+    /** Returns {@code true} if this rectangle is a square. */
+    public boolean isSquare() {
+        return Double.compare(width, height) == 0;
     }
 }

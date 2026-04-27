@@ -1,70 +1,77 @@
 package com.example.shapes;
 
 import java.util.List;
-import java.util.ArrayList;
 import java.util.Map;
-import java.util.HashMap;
+import java.util.stream.Collectors;
 
 /**
  * Utility class for reporting shape information.
- * Java 11-era pattern: static utility methods, traditional collections.
+ *
+ * <p>Java 21 modernization highlights:
+ * <ul>
+ *   <li>Streams + collectors replace hand-rolled accumulation loops</li>
+ *   <li>Text block for the report header</li>
+ *   <li>{@code List.copyOf} via {@code Stream.toList()} for immutable results</li>
+ *   <li>{@code Map.Entry} traversal replaced by {@code forEach}</li>
+ * </ul>
  */
-public class ShapeReporter {
+public final class ShapeReporter {
+
+    private ShapeReporter() {}   // utility class — no instances
 
     /**
      * Generates a full report of a list of shapes.
-     * Java 11-era pattern: StringBuilder, old-style loops.
+     *
+     * <p>Uses a text block for the static header and
+     * {@code String.join} / stream collectors for the dynamic sections.
      */
     public static String generateReport(List<Shape> shapes) {
-        ShapeCalculator calculator = new ShapeCalculator();
+        var calculator = new ShapeCalculator();
 
-        StringBuilder sb = new StringBuilder();
-        sb.append("=== Shape Report ===\n");
-        sb.append("Total shapes: ").append(shapes.size()).append("\n");
-        sb.append("Total area: ").append(
-            String.format("%.4f", calculator.totalArea(shapes))).append("\n");
-        sb.append("Total perimeter: ").append(
-            String.format("%.4f", calculator.totalPerimeter(shapes))).append("\n");
-        sb.append("\n");
+        var typeCounts = shapes.stream()
+                .collect(Collectors.groupingBy(
+                        s -> s.getClass().getSimpleName(),
+                        Collectors.counting()));
 
-        Map<String, Integer> typeCounts = new HashMap<>();
-        for (Shape shape : shapes) {
-            String name = shape.getClass().getSimpleName();
-            Integer count = typeCounts.get(name);
-            if (count == null) {
-                typeCounts.put(name, 1);
-            } else {
-                typeCounts.put(name, count + 1);
-            }
-        }
+        var byTypeLines = typeCounts.entrySet().stream()
+                .sorted(Map.Entry.comparingByKey())
+                .map(e -> "  %s: %d".formatted(e.getKey(), e.getValue()))
+                .collect(Collectors.joining("\n"));
 
-        sb.append("By type:\n");
-        for (Map.Entry<String, Integer> entry : typeCounts.entrySet()) {
-            sb.append("  ").append(entry.getKey())
-              .append(": ").append(entry.getValue()).append("\n");
-        }
+        var detailLines = shapes.stream()
+                .map(s -> "  " + calculator.formatShapeSummary(s).replace("\n", "\n  ") + "\n  ---")
+                .collect(Collectors.joining("\n"));
 
-        sb.append("\nDetails:\n");
-        for (Shape shape : shapes) {
-            sb.append("  ").append(calculator.formatShapeSummary(shape))
-              .append("\n  ---\n");
-        }
+        return """
+                === Shape Report ===
+                Total shapes:    %d
+                Total area:      %.4f
+                Total perimeter: %.4f
 
-        return sb.toString();
+                By type:
+                %s
+
+                Details:
+                %s
+                """.formatted(
+                shapes.size(),
+                calculator.totalArea(shapes),
+                calculator.totalPerimeter(shapes),
+                byTypeLines,
+                detailLines);
     }
 
     /**
-     * Returns a list of colors used by the shapes.
-     * Java 11-era pattern: manual deduplication with ArrayList.
+     * Returns an immutable, deduplicated list of colors used by the shapes,
+     * preserving encounter order.
+     *
+     * <p>Java 21 modernization: a single stream pipeline with a linked-set
+     * collector replaces the manual {@code contains}-before-{@code add} loop.
      */
     public static List<String> distinctColors(List<Shape> shapes) {
-        List<String> colors = new ArrayList<>();
-        for (Shape shape : shapes) {
-            String color = shape.getColor();
-            if (!colors.contains(color)) {
-                colors.add(color);
-            }
-        }
-        return colors;
+        return shapes.stream()
+                .map(Shape::color)
+                .distinct()
+                .toList();
     }
 }
