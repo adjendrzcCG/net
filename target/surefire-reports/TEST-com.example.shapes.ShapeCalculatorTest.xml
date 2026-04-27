@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.example.shapes.ShapeCalculatorTest" time="0.14" tests="26" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.example.shapes.ShapeCalculatorTest" time="0.139" tests="26" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -11,7 +11,7 @@
     <property name="java.vm.specification.version" value="21"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/temurin-21-jdk-amd64/lib"/>
-    <property name="sun.java.command" value="/home/runner/work/net/net/target/surefire/surefirebooter-20260427135618250_3.jar /home/runner/work/net/net/target/surefire 2026-04-27T13-56-18_161-jvmRun1 surefire-20260427135618250_1tmp surefire_0-20260427135618250_2tmp"/>
+    <property name="sun.java.command" value="/home/runner/work/net/net/target/surefire/surefirebooter-20260427135923199_3.jar /home/runner/work/net/net/target/surefire 2026-04-27T13-59-23_134-jvmRun1 surefire-20260427135923199_1tmp surefire_0-20260427135923199_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/home/runner/work/net/net/target/test-classes:/home/runner/work/net/net/target/classes:/home/runner/.m2/repository/org/junit/jupiter/junit-jupiter/5.10.1/junit-jupiter-5.10.1.jar:/home/runner/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.1/junit-jupiter-api-5.10.1.jar:/home/runner/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/home/runner/.m2/repository/org/junit/platform/junit-platform-commons/1.10.1/junit-platform-commons-1.10.1.jar:/home/runner/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/runner/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.10.1/junit-jupiter-params-5.10.1.jar:/home/runner/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.10.1/junit-jupiter-engine-5.10.1.jar:/home/runner/.m2/repository/org/junit/platform/junit-platform-engine/1.10.1/junit-platform-engine-1.10.1.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -26,7 +26,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
-    <property name="surefire.real.class.path" value="/home/runner/work/net/net/target/surefire/surefirebooter-20260427135618250_3.jar"/>
+    <property name="surefire.real.class.path" value="/home/runner/work/net/net/target/surefire/surefirebooter-20260427135923199_3.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="21.0.10+7-LTS"/>
     <property name="user.name" value="runner"/>
@@ -55,28 +55,28 @@
   </properties>
   <testcase name="testCircleArea" classname="com.example.shapes.ShapeCalculatorTest" time="0.029"/>
   <testcase name="testRectangleIsSquare" classname="com.example.shapes.ShapeCalculatorTest" time="0.002"/>
-  <testcase name="testCircleEquality" classname="com.example.shapes.ShapeCalculatorTest" time="0.017"/>
-  <testcase name="testFormatShapeSummary" classname="com.example.shapes.ShapeCalculatorTest" time="0.017"/>
+  <testcase name="testCircleEquality" classname="com.example.shapes.ShapeCalculatorTest" time="0.014"/>
+  <testcase name="testFormatShapeSummary" classname="com.example.shapes.ShapeCalculatorTest" time="0.013"/>
   <testcase name="testFilterByType" classname="com.example.shapes.ShapeCalculatorTest" time="0.003"/>
-  <testcase name="testCircleAccessors" classname="com.example.shapes.ShapeCalculatorTest" time="0.002"/>
+  <testcase name="testCircleAccessors" classname="com.example.shapes.ShapeCalculatorTest" time="0.001"/>
   <testcase name="testLargestByAreaEmptyList" classname="com.example.shapes.ShapeCalculatorTest" time="0.002"/>
   <testcase name="testDescribeCircle" classname="com.example.shapes.ShapeCalculatorTest" time="0.002"/>
-  <testcase name="testRectangleArea" classname="com.example.shapes.ShapeCalculatorTest" time="0.0"/>
+  <testcase name="testRectangleArea" classname="com.example.shapes.ShapeCalculatorTest" time="0.001"/>
   <testcase name="testRectanglePerimeter" classname="com.example.shapes.ShapeCalculatorTest" time="0.001"/>
-  <testcase name="testClassifyCircle" classname="com.example.shapes.ShapeCalculatorTest" time="0.002"/>
+  <testcase name="testClassifyCircle" classname="com.example.shapes.ShapeCalculatorTest" time="0.003"/>
   <testcase name="testDescribeTriangle" classname="com.example.shapes.ShapeCalculatorTest" time="0.001"/>
-  <testcase name="testClassifyTriangle" classname="com.example.shapes.ShapeCalculatorTest" time="0.002"/>
-  <testcase name="testTotalArea" classname="com.example.shapes.ShapeCalculatorTest" time="0.002"/>
+  <testcase name="testClassifyTriangle" classname="com.example.shapes.ShapeCalculatorTest" time="0.001"/>
+  <testcase name="testTotalArea" classname="com.example.shapes.ShapeCalculatorTest" time="0.003"/>
   <testcase name="testTotalPerimeter" classname="com.example.shapes.ShapeCalculatorTest" time="0.001"/>
   <testcase name="testTriangleArea" classname="com.example.shapes.ShapeCalculatorTest" time="0.001"/>
-  <testcase name="testTriangleKind" classname="com.example.shapes.ShapeCalculatorTest" time="0.0"/>
+  <testcase name="testTriangleKind" classname="com.example.shapes.ShapeCalculatorTest" time="0.001"/>
   <testcase name="testCircleValidation" classname="com.example.shapes.ShapeCalculatorTest" time="0.005"/>
   <testcase name="testClassifyRectangle" classname="com.example.shapes.ShapeCalculatorTest" time="0.001"/>
   <testcase name="testDescribeRectangle" classname="com.example.shapes.ShapeCalculatorTest" time="0.001"/>
   <testcase name="testLargestByArea" classname="com.example.shapes.ShapeCalculatorTest" time="0.001"/>
   <testcase name="testDistinctColors" classname="com.example.shapes.ShapeCalculatorTest" time="0.001"/>
-  <testcase name="testGenerateReport" classname="com.example.shapes.ShapeCalculatorTest" time="0.005"/>
-  <testcase name="testTrianglePerimeter" classname="com.example.shapes.ShapeCalculatorTest" time="0.002"/>
+  <testcase name="testGenerateReport" classname="com.example.shapes.ShapeCalculatorTest" time="0.007"/>
+  <testcase name="testTrianglePerimeter" classname="com.example.shapes.ShapeCalculatorTest" time="0.001"/>
   <testcase name="testCirclePerimeter" classname="com.example.shapes.ShapeCalculatorTest" time="0.001"/>
-  <testcase name="testInvalidTriangleThrows" classname="com.example.shapes.ShapeCalculatorTest" time="0.0"/>
+  <testcase name="testInvalidTriangleThrows" classname="com.example.shapes.ShapeCalculatorTest" time="0.001"/>
 </testsuite>
