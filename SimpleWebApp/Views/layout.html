@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<!--
+  layout.html — Thymeleaf Layout Dialect master template
+  ========================================================
+  Java/Spring Boot equivalent of Views/Shared/_Layout.cshtml
+
+  .NET → Java Template Engine Mapping:
+    _Layout.cshtml (Razor)                 layout.html (Thymeleaf Layout Dialect)
+    ─────────────────────────────────────  ────────────────────────────────────────
+    @ViewData["Title"] - SimpleWebApp      layout:title-pattern="$CONTENT_TITLE - SimpleWebApp"
+    asp-controller="Home" asp-action="..."  th:href="@{/home/about}"
+    ~/lib/bootstrap/...                    Bootstrap 5.3.2 CDN
+    ~/lib/jquery/...                       jQuery 3.7.1 CDN
+    ~/css/site.css                         th:href="@{/css/site.css}"
+    ~/js/site.js                           th:src="@{/js/site.js}"
+    @RenderBody()                          <div layout:fragment="content">
+    @await RenderSectionAsync("Scripts")   <th:block layout:fragment="scripts">
+    asp-append-version="true"             Spring Boot handles cache busting
+
+  Usage in page templates:
+    <html layout:decorate="~{layout}">
+      <head><title>Page Title</title></head>
+      <body>
+        <div layout:fragment="content">
+          <!-- page-specific content here -->
+        </div>
+      </body>
+    </html>
+-->
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <!--
+      Dynamic title via Thymeleaf Layout Dialect title-pattern.
+      $CONTENT_TITLE is replaced with the <title> of the decorating page.
+      Equivalent to: @ViewData["Title"] - SimpleWebApp
+    -->
+    <title layout:title-pattern="$CONTENT_TITLE - SimpleWebApp">SimpleWebApp</title>
+
+    <!--
+      Bootstrap 5.3.2 — CDN (replaces wwwroot/lib/bootstrap/)
+      Same Bootstrap version as the original .NET app (Bootstrap 5.x).
+    -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+          crossorigin="anonymous"/>
+
+    <!--
+      Application stylesheet — equivalent to ~/css/site.css with asp-append-version="true"
+      Spring Boot serves this from classpath:/static/css/site.css (mapped from wwwroot/css/)
+    -->
+    <link rel="stylesheet" th:href="@{/css/site.css}"/>
+</head>
+<body>
+
+    <!-- ── Navigation Bar ─────────────────────────────────────────────────── -->
+    <!--
+      Equivalent to the <nav> block in _Layout.cshtml.
+      asp-controller + asp-action Tag Helpers replaced with th:href="@{/path}" expressions.
+    -->
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" th:href="@{/}">SimpleWebApp</a>
+                <button class="navbar-toggler" type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target=".navbar-collapse"
+                        aria-controls="navbarSupportedContent"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <!--
+                              asp-area="" asp-controller="Home" asp-action="Index"
+                              → th:href="@{/}"
+                            -->
+                            <a class="nav-link text-dark" th:href="@{/}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <!--
+                              asp-area="" asp-controller="Home" asp-action="About"
+                              → th:href="@{/home/about}"
+                            -->
+                            <a class="nav-link text-dark" th:href="@{/home/about}">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <!--
+                              asp-area="" asp-controller="Home" asp-action="Privacy"
+                              → th:href="@{/home/privacy}"
+                            -->
+                            <a class="nav-link text-dark" th:href="@{/home/privacy}">Privacy</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ── Main Content ───────────────────────────────────────────────────── -->
+    <!--
+      layout:fragment="content" is the insertion point for page-specific content.
+      Equivalent to @RenderBody() in _Layout.cshtml.
+      Each page template fills this fragment via layout:fragment="content".
+    -->
+    <div class="container">
+        <main role="main" class="pb-3">
+            <div layout:fragment="content">
+                <!-- Page content will be placed here by the Layout Dialect -->
+            </div>
+        </main>
+    </div>
+
+    <!-- ── Footer ─────────────────────────────────────────────────────────── -->
+    <!--
+      Equivalent to the <footer> block in _Layout.cshtml.
+      asp-controller + asp-action replaced with th:href.
+    -->
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2024 - SimpleWebApp -
+            <a th:href="@{/home/privacy}">Privacy</a>
+        </div>
+    </footer>
+
+    <!-- ── Scripts ────────────────────────────────────────────────────────── -->
+    <!--
+      jQuery 3.7.1 + Bootstrap 5.3.2 JS — CDN (replaces wwwroot/lib/jquery/ and wwwroot/lib/bootstrap/)
+    -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
+
+    <!--
+      Application JavaScript — equivalent to ~/js/site.js with asp-append-version="true"
+      Spring Boot serves this from classpath:/static/js/site.js (mapped from wwwroot/js/)
+    -->
+    <script th:src="@{/js/site.js}"></script>
+
+    <!--
+      Optional scripts section — equivalent to @await RenderSectionAsync("Scripts", required: false)
+      Page templates can inject additional scripts via layout:fragment="scripts".
+    -->
+    <th:block layout:fragment="scripts">
+        <!-- Per-page scripts injected here -->
+    </th:block>
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+2025-01-01T00:00:01Z | modernize-java | updated  | .gitignore                                       | Added Java/Maven build artifact patterns (target/, *.class, *.jar, .idea/, etc.)
+2025-01-01T00:00:02Z | modernize-java | created  | SimpleWebApp/pom.xml                             | Maven 3.9+ POM — Spring Boot 3.3.5 parent, Java 21, Thymeleaf, non-standard source layout
+2025-01-01T00:00:03Z | modernize-java | created  | SimpleWebApp/application.properties              | Spring Boot config — replaces appsettings.json (logging, Thymeleaf, error path, static)
+2025-01-01T00:00:04Z | modernize-java | created  | SimpleWebApp/SimpleWebAppApplication.java        | @SpringBootApplication entry point — replaces Program.cs + Startup.cs (115 lines → 1 annotation)
+2025-01-01T00:00:05Z | modernize-java | created  | SimpleWebApp/Controllers/HomeController.java     | Spring @Controller — ports HomeController.cs (Index, About, Privacy, Error actions + ErrorController)
+2025-01-01T00:00:06Z | modernize-java | created  | SimpleWebApp/Models/ErrorViewModel.java          | Java 21 record — replaces C# ErrorViewModel class with immutable record + compact constructor
+2025-01-01T00:00:07Z | modernize-java | created  | SimpleWebApp/Views/layout.html                   | Thymeleaf Layout Dialect master template — replaces Views/Shared/_Layout.cshtml + @RenderBody()
+2025-01-01T00:00:08Z | modernize-java | created  | SimpleWebApp/Views/Home/index.html               | Thymeleaf template — replaces Views/Home/Index.cshtml (Welcome page)
+2025-01-01T00:00:09Z | modernize-java | created  | SimpleWebApp/Views/Home/about.html               | Thymeleaf template — replaces Views/Home/About.cshtml (th:text=${message} replaces @ViewData)
+2025-01-01T00:00:10Z | modernize-java | created  | SimpleWebApp/Views/Home/privacy.html             | Thymeleaf template — replaces Views/Home/Privacy.cshtml
+2025-01-01T00:00:11Z | modernize-java | created  | SimpleWebApp/Views/Shared/error.html             | Thymeleaf template — replaces Views/Shared/Error.cshtml (th:if=${showRequestId} + th:text=${requestId})
+2025-01-01T00:00:12Z | modernize-java | created  | modernize-java-report.json                       | Full JSON modernization report — version audit, dependency analysis, code pattern inventory
+2025-01-01T00:00:13Z | modernize-java | created  | JAVA-MODERNIZATION.md                            | Comprehensive migration guide — 8-phase plan, Razor→Thymeleaf mapping, validation checklist
+2025-01-01T00:00:14Z | modernize-java | updated  | README.md                                        | Added Java port documentation with build/run instructions and file mapping table
+2025-01-01T00:00:15Z | modernize-java | created  | agent-log.txt                                    | This agent activity log

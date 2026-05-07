@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<!--
+  Shared/error.html — Thymeleaf template
+  =========================================
+  Java/Spring Boot equivalent of Views/Shared/Error.cshtml
+
+  .NET Razor original:
+    @model ErrorViewModel
+    @{
+        ViewData["Title"] = "Error";
+    }
+    <h1 class="text-danger">Error.</h1>
+    <h2 class="text-danger">An error occurred while processing your request.</h2>
+    @if (Model.ShowRequestId)
+    {
+        <p><strong>Request ID:</strong> <code>@Model.RequestId</code></p>
+    }
+    <h3>Development Mode</h3>
+    <p>Swapping to <strong>Development</strong> environment will display more
+       detailed information about the error that occurred.</p>
+    <p>...</p>
+
+  Thymeleaf equivalent (this file):
+    @model ErrorViewModel           → th:object / model attributes
+    @if (Model.ShowRequestId)       → th:if="${showRequestId}"
+    @Model.RequestId                → th:text="${requestId}"
+    ViewData["Title"] = "Error"     → <title>Error</title> (Layout Dialect)
+
+  Model attributes set by HomeController.error():
+    requestId    (String) — the HTTP request ID (from Servlet 6.0 getRequestId())
+    showRequestId (boolean) — whether to display the request ID section
+    errorViewModel (ErrorViewModel record) — the full record instance
+
+  Controller: HomeController.error() → ANY /home/error
+-->
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <!--
+      Page title — equivalent to ViewData["Title"] = "Error"
+      Rendered as "Error - SimpleWebApp" by the Layout Dialect.
+    -->
+    <title>Error</title>
+</head>
+<body>
+
+    <div layout:fragment="content">
+
+        <h1 class="text-danger">Error.</h1>
+        <h2 class="text-danger">An error occurred while processing your request.</h2>
+
+        <!--
+          @if (Model.ShowRequestId) { ... }
+          → th:if="${showRequestId}"
+
+          Renders the request ID block only when a non-empty request ID is available.
+          The equivalent of the C# ErrorViewModel.ShowRequestId computed property
+          (implemented as showRequestId() method on the Java record).
+        -->
+        <div th:if="${showRequestId}">
+            <p>
+                <strong>Request ID:</strong>
+                <!--
+                  @Model.RequestId
+                  → th:text="${requestId}"
+                -->
+                <code th:text="${requestId}">request-id-placeholder</code>
+            </p>
+        </div>
+
+        <h3>Development Mode</h3>
+        <p>
+            Switching to the <strong>dev</strong> Spring profile will display more
+            detailed information about the error that occurred.
+        </p>
+        <p>
+            <strong>The dev profile should not be enabled for deployed applications.</strong>
+            It can result in displaying sensitive information from exceptions to end users.
+            For local debugging, enable the <strong>dev</strong> profile by setting the
+            <strong>SPRING_PROFILES_ACTIVE</strong> environment variable to
+            <strong>dev</strong> and restarting the application.
+        </p>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!--
+  Home/privacy.html — Thymeleaf template
+  ========================================
+  Java/Spring Boot equivalent of Views/Home/Privacy.cshtml
+
+  .NET Razor original:
+    @{
+        ViewData["Title"] = "Privacy Policy";
+    }
+    <h1>@ViewData["Title"]</h1>
+    <p>Use this page to detail your site's privacy policy.</p>
+
+  Thymeleaf equivalent (this file):
+    - @ViewData["Title"] → <title> sets page title (Layout Dialect handles it)
+    - The <h1> renders the title as static text (no dynamic binding needed here)
+
+  Controller: HomeController.privacy() → GET /home/privacy
+-->
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <!--
+      Page title — equivalent to ViewData["Title"] = "Privacy Policy"
+      Rendered as "Privacy Policy - SimpleWebApp" by the Layout Dialect.
+    -->
+    <title>Privacy Policy</title>
+</head>
+<body>
+
+    <div layout:fragment="content">
+        <!--
+          <h1>@ViewData["Title"]</h1>
+          Rendered as static text; the value is the same as the page title.
+        -->
+        <h1>Privacy Policy</h1>
+
+        <p>Use this page to detail your site&rsquo;s privacy policy.</p>
+    </div>
+
+</body>
+</html>
